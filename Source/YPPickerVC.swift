@@ -288,13 +288,15 @@ public class YPPickerVC: YPBottomPager, YPBottomPagerDelegate {
         
         if mode == .library {
             libraryVC.doAfterPermissionCheck { [weak self] in
-                libraryVC.selectedMedia(photoCallback: { img, exifMeta in
+                // ⚠️ Additinal.
+                libraryVC.selectedOriginalMedia(photoCallback: { img, exifMeta in
                     self?.didSelectItems?([YPMediaItem
                         .photo(p: YPMediaPhoto(image: img, exifMeta: exifMeta))])
-                }, videoCallback: { videoURL in
+                }, videoCallback: { asset in
                     self?.didSelectItems?([YPMediaItem
-                        .video(v: YPMediaVideo(thumbnail: thumbnailFromVideoPath(videoURL),
-                                               videoURL: videoURL))])
+//                        .video(v: YPMediaVideo(thumbnail: thumbnailFromVideoPath(videoURL),
+//                                               videoURL: videoURL))])
+                        .video(v: YPMediaVideo(asset: asset))])
                 }, multipleItemsCallback: { items in
                     self?.didSelectItems?(items)
                 })

@@ -65,6 +65,17 @@ class LibraryMediaManager {
         }
     }
     
+    // ⚠️ Additinal.
+    func fetchOriginalVideoUrlAndCrop(for videoAsset: PHAsset, callback: @escaping (AVAsset) -> Void) {
+        PHCachingImageManager().requestAVAsset(forVideo: videoAsset, options: nil) { (avAsset, _, _) in
+            DispatchQueue.main.async {
+                if let avAsset = avAsset {
+                    callback(avAsset)
+                }
+            }
+        }
+    }
+    
     func fetchVideoUrlAndCrop(for videoAsset: PHAsset, cropRect: CGRect, callback: @escaping (URL) -> Void) {
         let videosOptions = PHVideoRequestOptions()
         videosOptions.isNetworkAccessAllowed = true

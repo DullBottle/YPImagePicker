@@ -29,12 +29,25 @@ public class YPMediaVideo {
     public var thumbnail: UIImage
     public var url: URL
     public let fromCamera: Bool
+    
+    //⚠️ additional.
+    public let asset: AVAsset
 
     init(thumbnail: UIImage, videoURL: URL, fromCamera: Bool = false) {
         self.thumbnail = thumbnail
         self.url = videoURL
         self.fromCamera = fromCamera
+        self.asset = AVAsset(url: videoURL)
     }
+    
+    //⚠️ additional.
+    init(asset: AVAsset, thumbnail: UIImage = UIImage(), videoURL: URL = URL(string: "tmpURL")!, fromCamera: Bool = false) {
+        self.asset = asset
+        self.thumbnail = thumbnail
+        self.url = videoURL
+        self.fromCamera = fromCamera
+    }
+    
 }
 
 public enum YPMediaItem {

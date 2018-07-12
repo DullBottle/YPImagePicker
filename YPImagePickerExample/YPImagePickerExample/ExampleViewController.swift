@@ -172,7 +172,7 @@ class ExampleViewController: UIViewController {
                     picker.dismiss(animated: true, completion: nil)
                 case .video(let video):
                     self.selectedImageV.image = video.thumbnail
-                    
+
                     let assetURL = video.url
                     let playerVC = AVPlayerViewController()
                     let player = AVPlayer(playerItem: AVPlayerItem(url:assetURL))
